@@ -1,36 +1,45 @@
 import React from "react";
-import {
-  Home,
-  BookOpen,
-  Calendar,
-  FileText,
-  Settings,
-  LogOut,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { NavLink } from "react-router-dom";
+import { Calendar } from "lucide-react";
 import clsx from "clsx";
 import Logo from "assets/images/logo-main.webp";
 import {
   HomeIcon,
   CourseIcon,
   TutorsIcon,
-  ReceiptsIcon,
+  StudentsIcon,
+  TransactionsIcon,
+  CouponIcon,
+  PermissionIcon,
   SettingsIcon,
-  LogoutIcon
+  LogoutIcon,
 } from "constants/sidebar_icons";
 
 const menuItems = [
-  { icon: <HomeIcon size={24} />, label: "Home" },
-  { icon: <TutorsIcon size={24} />, label: "Tutors" },
-  { icon: <CourseIcon size={24} />, label: "Courses" },
-  { icon: <Calendar size={18} />, label: "My Calendar" },
-  { icon: <ReceiptsIcon size={20} />, label: "My Receipts" },
+  { icon: <HomeIcon size={24} />, label: "Home", to: "/dashboard" },
+  { icon: <TutorsIcon size={24} />, label: "Tutors", to: "/tutors" },
+  { icon: <StudentsIcon size={24} />, label: "Students", to: "/students" },
+  { icon: <CourseIcon size={24} />, label: "Courses", to: "/courses" },
+  {
+    icon: <TransactionsIcon size={22} />,
+    label: "Transactions",
+    to: "/transactions",
+  },
+  {
+    icon: <CouponIcon size={24} />,
+    label: "Coupon Management",
+    to: "/coupon-management",
+  },
+  {
+    icon: <PermissionIcon size={24} />,
+    label: "Admins & Permissions",
+    to: "/admin-permissions",
+  },
 ];
 
 const bottomItems = [
-  { icon: <SettingsIcon size={22} />, label: "My Settings" },
-  { icon: <LogoutIcon size={22} />, label: "Log Out" },
+  { icon: <SettingsIcon size={22} />, label: "My Settings", to: "/settings" },
+  { icon: <LogoutIcon size={22} />, label: "Log Out", to: "/auth/login" },
 ];
 
 const Sidebar = ({ isOpen, toggle }) => {
@@ -85,57 +94,100 @@ const Sidebar = ({ isOpen, toggle }) => {
           {/* Menu */}
           <nav className="mt-6">
             <ul className="space-y-5 px-[1rem]">
-              {menuItems.map((item, index) => (
-                <li
-                  key={index}
-                  className={clsx(
-                    "flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-light_brand_primary rounded-lg",
-                    item.label === "Home" && "bg-brand_primary"
-                  )}
-                >
-                  <span className="text-brand_secondary basis-[10%] flex justify-center items-center">
-                    {item.icon}
-                  </span>
-                  {isOpen && (
-                    <span
-                      className={`font-aileron_r text-14 text-brand_secondary ${
-                        item.label === "Home" && "font-aileron_sb"
-                      }`}
-                    >
-                      {item.label}
+              {menuItems.map((item, index) => {
+                const content = (
+                  <>
+                    <span className="text-brand_secondary basis-[10%] flex justify-center items-center">
+                      {item.icon}
                     </span>
-                  )}
-                </li>
-              ))}
+                    {isOpen && (
+                      <span className={"font-aileron_r text-14 text-brand_secondary"}>
+                        {item.label}
+                      </span>
+                    )}
+                  </>
+                );
+
+                if (item.to) {
+                  return (
+                    <li key={index}>
+                      <NavLink
+                        to={item.to}
+                        className={({ isActive }) =>
+                          clsx(
+                            "flex items-center gap-3 px-4 py-3 hover:bg-light_brand_primary rounded-lg",
+                            isActive && "bg-brand_primary"
+                          )
+                        }
+                      >
+                        {content}
+                      </NavLink>
+                    </li>
+                  );
+                }
+
+                // return (
+                //   <li
+                //     key={index}
+                //     className={clsx(
+                //       "flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-light_brand_primary rounded-lg"
+                //     )}
+                //   >
+                //     {content}
+                //   </li>
+                // );
+              })}
             </ul>
           </nav>
         </div>
 
         {/* Bottom */}
         <div className="mb-4">
-          <ul className="space-y-1  px-[1rem]">
-            {bottomItems.map((item, index) => (
-              <li
-                key={index}
-                className={clsx(
-                  "flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-light_brand_primary rounded-lg",
-                  item.label === "Home" && "bg-brand_primary"
-                )}
-              >
-                <span className="text-brand_secondary basis-[10%] flex justify-center items-center">
-                  {item.icon}
-                </span>
-                {isOpen && (
-                  <span
-                    className={`font-aileron_r text-14 text-brand_secondary ${
-                      item.label === "Home" && "font-aileron_sb"
-                    }`}
-                  >
-                    {item.label}
+          <ul className="space-y-1 px-[1rem]">
+            {bottomItems.map((item, index) => {
+              const content = (
+                <>
+                  <span className="text-brand_secondary basis-[10%] flex justify-center items-center">
+                    {item.icon}
                   </span>
-                )}
-              </li>
-            ))}
+                  {isOpen && (
+                    <span className={"font-aileron_r text-14 text-brand_secondary"}>
+                      {item.label}
+                    </span>
+                  )}
+                </>
+              );
+
+              if (item.to) {
+                return (
+                  <li key={index}>
+                    <NavLink
+                      to={item.to}
+                      className={({ isActive }) =>
+                        clsx(
+                          "flex items-center gap-3 px-4 py-3 hover:bg-light_brand_primary rounded-lg",
+                          isActive && "bg-brand_primary"
+                        )
+                      }
+                    >
+                      {content}
+                    </NavLink>
+                  </li>
+                );
+              }
+
+              // If no "to", render as plain list item
+              // return (
+              //   <li
+              //     key={index}
+              //     className={clsx(
+              //       "flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-light_brand_primary rounded-lg"
+              //     )}
+              //   >
+              //     {content}
+              //   </li>
+              // );
+            })}
           </ul>
         </div>
       </aside>

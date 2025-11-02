@@ -67,7 +67,10 @@ export default function MainLayout() {
 
             <div className="min-w-[80%] w-full">
               <Header toggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)} />
-              <main className="flex-1 h-full w-full overflow-y-auto p-4 md:p-6 mb-[7rem] bg-white">
+              <main
+                className="flex-1 w-full p-4 md:p-4 bg-white overflow-y-auto"
+                style={{ height: "calc(100vh - 90px)" }}
+              >
                 <Outlet />
               </main>
             </div>

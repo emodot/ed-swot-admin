@@ -7,6 +7,7 @@ export default function QuickActions({actions}) {
         {actions.map((action, index) => (
           <button
             key={index}
+            onClick={action.onClick}
             className={`flex items-center gap-2 px-6 py-3 rounded-[8px] border ${action.bg} ${action.border} ${action.hover} transition-all font-aileron_sb text-14 text-brand_secondary`}
           >
             {action.label}

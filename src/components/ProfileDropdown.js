@@ -80,22 +80,14 @@ export default function ProfileDropdown() {
       {/* Dropdown */}
       {open && (
         <div className="absolute right-0 mt-3 w-72 bg-white rounded-2xl shadow-lg border border-neutral_stroke_2 p-4 z-50">
-          <h3 className="font-albra_sans_sb text-16 mb-3">
-            Hello, Ariana Wilson!
+          <h3 className="font-aileron_sb text-16 mb-3">
+            Welcome Admin!
           </h3>
 
           <ul className="space-y-2 text-brand_secondary">
             <li className="flex items-center gap-3 py-2 hover:bg-neutral_disabled rounded-lg px-3 cursor-pointer">
               <FiUser className="text-18" />
               <span className="font-aileron_r text-14">My Account</span>
-            </li>
-
-            <li className="flex items-center justify-between py-2 hover:bg-neutral_disabled rounded-lg px-3 cursor-pointer">
-              <div className="flex items-center gap-3">
-                <FiRefreshCw className="text-18" />
-                <span className="font-aileron_r text-14">Switch User</span>
-              </div>
-              <span className="text-16">⌄</span>
             </li>
 
             <li className="flex items-center gap-3 py-2 hover:bg-neutral_disabled rounded-lg px-3 cursor-pointer">
@@ -108,12 +100,6 @@ export default function ProfileDropdown() {
               <span className="font-aileron_r text-14">Log Out</span>
             </li>
           </ul>
-
-          {/* Renewal Box */}
-          <div className="mt-4 border border-success bg-success_fade text-success_900 rounded-lg py-2 px-4 flex items-center justify-center gap-2 font-aileron_sb text-14">
-            <FiClock />
-            30 Days Until Renewal
-          </div>
         </div>
       )}
     </div>

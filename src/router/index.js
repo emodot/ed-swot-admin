@@ -6,13 +6,14 @@ import AuthLayout from "../layouts/AuthLayout";
 import MainLayout from "../layouts/MainLayout";
 
 // Lazy Loaded Pages
-const SignUp = lazy(() => import("../pages/auth/signup"));
 const Login = lazy(() => import("../pages/auth/login"));
 const ForgotPassword = lazy(() => import("../pages/auth/forgot-password"));
 const ResetPassword = lazy(() => import("../pages/auth/reset-password"));
-const MembershipPlans = lazy(() => import("../pages/auth/signup/membership-plans"));
-const MultiLearnerSetup = lazy(() =>import("../pages/auth/multi-learner-setup"));
 const Dashboard = lazy(() => import("../pages/dashboard"));
+const Tutor = lazy(() => import("../pages/tutor"));
+const Students = lazy(() => import("../pages/students"));
+const Courses = lazy(() => import("../pages/courses"));
+const AdminPermissions = lazy(() => import("../pages/admin-permissions"));
 // const WhatWeDo = lazy(() => import("../pages/what-we-do"));
 // const PlansAndPricing = lazy(() => import("../pages/plans-and-pricing"));
 // const Request = lazy(() => import("../pages/request"));
@@ -31,10 +32,6 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "signup",
-        element: <SignUp />,
-      },
-      {
         path: "login",
         element: <Login />,
       },
@@ -45,14 +42,6 @@ const router = createBrowserRouter([
       {
         path: "reset-password",
         element: <ResetPassword />,
-      },
-      {
-        path: "signup/membership-plans",
-        element: <MembershipPlans />,
-      },
-      {
-        path: "multi-learner-setup",
-        element: <MultiLearnerSetup />,
       },
     ],
   },
@@ -73,10 +62,22 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
       },
-      // {
-      //   path: "/terms-and-conditions",
-      //   element: <TermsAndConditions />,
-      // },
+      {
+        path: "/tutors",
+        element: <Tutor />,
+      },
+      {
+        path: "/students",
+        element: <Students />,
+      },
+      {
+        path: "/courses",
+        element: <Courses />,
+      },
+      {
+        path: "/admin-permissions",
+        element: <AdminPermissions />,
+      },
       // {
       //   path: "/privacy-policy",
       //   element: <PrivacyPolicy />,

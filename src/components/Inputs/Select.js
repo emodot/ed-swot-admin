@@ -1,26 +1,20 @@
 import useInputValidate from "hooks/useInputValidate";
 import { useMemo } from "react";
 
-const Input = ({
+const Select = ({
   label,
   id,
   disabled,
   variant,
   name,
-  type,
   placeholder,
   value,
   defaultValue,
-  maxLength,
-  inputMode,
-  max,
-  pattern,
   onChange,
-  readOnly,
-  onKeyDown,
   showError,
   onBlur,
   required,
+  options = [],
 }) => {
   const { error, validate } = useInputValidate(showError);
 
@@ -47,39 +41,45 @@ const Input = ({
           {label} {required && <span className="text-error">*</span>}
         </label>
       )}
-      <input
+      <select
         id={id}
         name={name}
-        type={type}
-        placeholder={placeholder || ""}
         value={value}
         disabled={disabled}
         defaultValue={defaultValue}
-        maxLength={maxLength}
-        inputMode={inputMode}
-        max={max}
-        pattern={pattern}
         data-testid={`test-${id}`}
         aria-labelledby={id}
         onChange={onChange}
-        readOnly={readOnly}
-        autoComplete="off"
         onBlur={onBlurAction}
-        //onKeyDown={() => setError('')}
-        onKeyDown={onKeyDown}
         className={`${variant} 
             ${inputError ? "border-error" : "border-neutral_stroke_1"} 
             h-[50px] px-4 mt-2 text-brand_secondary text-[16px] sm:text-14 w-full outline-0 border font-aileron_r hide_tap
             rounded-[10px] focus:outline-none focus:ring-2 focus:ring-brand_primary
             ${
               disabled
-                ? "bg-neutral_disabled border-neutral_stroke_2"
-                : "bg-white"
+                ? "bg-neutral_disabled border-neutral_stroke_2 cursor-not-allowed"
+                : "bg-white cursor-pointer"
             } 
           `}
-      />
+      >
+        {placeholder && (
+          <option value="" disabled>
+            {placeholder}
+          </option>
+        )}
+        {options.map((option) => {
+          const optionValue = option.value !== undefined ? option.value : option.id;
+          const optionLabel = option.label || option.name || option.text || optionValue;
+          return (
+            <option key={optionValue || optionLabel} value={optionValue}>
+              {optionLabel}
+            </option>
+          );
+        })}
+      </select>
     </div>
   );
 };
 
-export default Input;
+export default Select;
+

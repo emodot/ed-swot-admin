@@ -1,5 +1,4 @@
-import React from "react";
-import { lazy } from "react";
+import React, { lazy } from "react";
 import { createBrowserRouter, Outlet } from "react-router-dom";
 import ErrorPage from "../components/ErrorPage";
 import AuthLayout from "../layouts/AuthLayout";
@@ -10,16 +9,16 @@ const Login = lazy(() => import("../pages/auth/login"));
 const ForgotPassword = lazy(() => import("../pages/auth/forgot-password"));
 const ResetPassword = lazy(() => import("../pages/auth/reset-password"));
 const Dashboard = lazy(() => import("../pages/dashboard"));
+const IndexPage = lazy(() => import("../pages/index"));
 const Tutor = lazy(() => import("../pages/tutor"));
 const Students = lazy(() => import("../pages/students"));
 const Courses = lazy(() => import("../pages/courses"));
+const CouponManagement = lazy(() => import("../pages/coupon-management"));
 const AdminPermissions = lazy(() => import("../pages/admin-permissions"));
-// const WhatWeDo = lazy(() => import("../pages/what-we-do"));
-// const PlansAndPricing = lazy(() => import("../pages/plans-and-pricing"));
-// const Request = lazy(() => import("../pages/request"));
-// const Personal = lazy(() => import("../pages/request/personal"));
-// const ElderlyOne = lazy(() => import("../pages/request/elderly-one"));
-// const ReviewRequest = lazy(() => import("../pages/request/review"));
+const Settings = lazy(() => import("../pages/settings/index"));
+const Account = lazy(() => import("../pages/settings/account"));
+const Notification = lazy(() => import("../pages/settings/notifications"));
+const Security = lazy(() => import("../pages/settings/security"));
 
 const router = createBrowserRouter([
   {
@@ -55,33 +54,55 @@ const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "",
-        element: <Dashboard />,
+        index: true,
+        element: <IndexPage />,
       },
       {
         path: "dashboard",
         element: <Dashboard />,
       },
       {
-        path: "/tutors",
+        path: "tutors",
         element: <Tutor />,
       },
       {
-        path: "/students",
+        path: "students",
         element: <Students />,
       },
       {
-        path: "/courses",
+        path: "courses",
         element: <Courses />,
       },
       {
-        path: "/admin-permissions",
+        path: "coupon-management",
+        element: <CouponManagement />,
+      },
+      {
+        path: "admin-permissions",
         element: <AdminPermissions />,
       },
-      // {
-      //   path: "/privacy-policy",
-      //   element: <PrivacyPolicy />,
-      // },
+      {
+        path: "settings",
+        element: <Settings />,
+        children: [
+          {
+            path: "account",
+            element: <Account />,
+          },
+          {
+            path: "notification",
+            element: <Notification />,
+          },
+          {
+            path: "security",
+            element: <Security />,
+          },
+          {
+            index: true,
+            element: <Account />,
+          },
+        ],
+      },
     ],
   },
 ]);

@@ -9,10 +9,16 @@ import {
 } from "constants/quick_actions_icons";
 import DataTable from "components/Table/DataTable";
 import AddNewAdmin from "components/Modals/AddNewAdmin";
+import AddNewRole from "components/Modals/AddNewRole";
+import AllRoles from "components/Modals/AllRoles";
+import EmailInviteModal from "components/Modals/EmailInviteModal";
 
 
 const AdminPermissions = () => {
   const [isAddAdminOpen, setIsAddAdminOpen] = useState(false);
+  const [isAddRoleOpen, setIsAddRoleOpen] = useState(false);
+  const [isAllRolesOpen, setIsAllRolesOpen] = useState(false);
+  const [isEmailInviteOpen, setIsEmailInviteOpen] = useState(false);
 
 const tutors = [
   {
@@ -60,6 +66,7 @@ const tutors = [
       bg: "bg-[#FFECE3]",
       border: "border-[#FFB694]",
       hover: "hover:bg-[#FFD8C7]",
+      onClick: () => setIsAddRoleOpen(true),
     },
     {
       label: "View all roles",
@@ -67,6 +74,7 @@ const tutors = [
       bg: "bg-[#FFE8E8]",
       border: "border-[#FF9B9B]",
       hover: "hover:bg-[#FFD6D6]",
+      onClick: () => setIsAllRolesOpen(true),
     },
     {
       label: "Send email invitation",
@@ -74,6 +82,7 @@ const tutors = [
       bg: "bg-[#EEF9E9]",
       border: "border-[#8BD37B]",
       hover: "hover:bg-[#D9F1CF]",
+      onClick: () => setIsEmailInviteOpen(true),
     },
     {
       label: "View all invitations",
@@ -116,7 +125,19 @@ const tutors = [
 
       <AddNewAdmin
         isModalOpen={isAddAdminOpen}
-        setIsModalOpen={() => setIsAddAdminOpen(false)}
+        setIsModalOpen={setIsAddAdminOpen}
+      />
+      <AddNewRole
+        isModalOpen={isAddRoleOpen}
+        setIsModalOpen={setIsAddRoleOpen}
+      />
+      <AllRoles
+        isModalOpen={isAllRolesOpen}
+        setIsModalOpen={setIsAllRolesOpen}
+      />
+      <EmailInviteModal
+        isModalOpen={isEmailInviteOpen}
+        setIsModalOpen={setIsEmailInviteOpen}
       />
     </section>
   );

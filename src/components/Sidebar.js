@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { Calendar } from "lucide-react";
 import clsx from "clsx";
 import Logo from "assets/images/logo-main.webp";
 import {
@@ -16,7 +15,7 @@ import {
 } from "constants/sidebar_icons";
 
 const menuItems = [
-  { icon: <HomeIcon size={24} />, label: "Home", to: "/dashboard" },
+  { icon: <HomeIcon size={24} />, label: "Overview", to: "/dashboard" },
   { icon: <TutorsIcon size={24} />, label: "Tutors", to: "/tutors" },
   { icon: <StudentsIcon size={24} />, label: "Students", to: "/students" },
   { icon: <CourseIcon size={24} />, label: "Courses", to: "/courses" },
@@ -175,18 +174,6 @@ const Sidebar = ({ isOpen, toggle }) => {
                   </li>
                 );
               }
-
-              // If no "to", render as plain list item
-              // return (
-              //   <li
-              //     key={index}
-              //     className={clsx(
-              //       "flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-light_brand_primary rounded-lg"
-              //     )}
-              //   >
-              //     {content}
-              //   </li>
-              // );
             })}
           </ul>
         </div>

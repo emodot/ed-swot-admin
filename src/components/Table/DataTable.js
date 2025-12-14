@@ -6,6 +6,8 @@ const DataTable = ({
   columns = [],
   filters = {},
   itemsPerPage = 5,
+  customRenderers = {},
+  searchPlaceholder = "Search...",
 }) => {
   const [search, setSearch] = useState("");
   const [filterValues, setFilterValues] = useState(
@@ -55,10 +57,7 @@ const DataTable = ({
   const paginatedData = sortedData.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage
-  );
-
-  console.log("paginatedData", paginatedData);
-  
+  );  
 
   const handleSort = (key) => {
     setSortConfig((prev) => {
@@ -104,7 +103,7 @@ const DataTable = ({
         <div className="relative w-full md:w-[350px]">
           <input
             type="text"
-            placeholder="Search..."
+            placeholder={searchPlaceholder}
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
@@ -142,7 +141,9 @@ const DataTable = ({
             >
               {columns.map((col) => (
                 <td key={col.key} className="py-3 text-[14px]">
-                  {col.key === "course" ? (
+                  {customRenderers[col.key] ? (
+                    customRenderers[col.key](row, col)
+                  ) : col.key === "course" ? (
                     // status is either row.status or row.statusbar (if exists)
                     // fallback to "Active" if not present
                     (() => {
